@@ -1,19 +1,557 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asunto Oy Vuorilinna</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asunto Oy Vuorilinna Helsingissä</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --beige: #D6C8B8;
+    --beige-light: #EDE4D9;
+    --beige-dark: #B8A898;
+    --brown: #5C3D2E;
+    --cream: #F5EFE8;
+    --text-dark: #2E1F14;
+    --text-mid: #6B5444;
+    --text-light: #9A8070;
+    --white: #FDFAF7;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    background: var(--white);
+    color: var(--text-dark);
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(253, 250, 247, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--beige);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--brown);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--brown); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 72px;
+  }
+
+  .hero-image {
+    position: relative;
+    overflow: hidden;
+    background: var(--beige-light);
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 5rem 4rem 5rem;
+    background: var(--cream);
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+    font-weight: 500;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    font-weight: 400;
+    color: var(--text-mid);
+    margin-bottom: 3rem;
+    font-style: italic;
+  }
+
+  .hero-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--beige-dark);
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--text-mid);
+    max-width: 380px;
+    line-height: 1.9;
+  }
+
+  /* SECTIONS */
+  section { padding: 7rem 3rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 3rem;
+  }
+
+  /* FACTS */
+  .facts-section { background: var(--cream); }
+
+  .facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+    border: 1px solid var(--beige);
+  }
+
+  .fact-cell {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--beige);
+  }
+
+  .fact-cell:last-child { border-right: none; }
+
+  .fact-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.6rem;
+  }
+
+  .fact-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--brown);
+    line-height: 1;
+  }
+
+  .fact-unit {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--text-mid);
+    margin-top: 0.25rem;
+  }
+
+  /* ARCHITECT */
+  .architect-section { background: var(--white); }
+
+  .architect-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .architect-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    font-weight: 500;
+    color: var(--brown);
+    line-height: 1.25;
+    margin-bottom: 0.4rem;
+  }
+
+  .architect-work {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+  }
+
+  .architect-ornament {
+    width: 40px;
+    height: 1px;
+    background: var(--beige-dark);
+    margin-bottom: 2rem;
+  }
+
+  .architect-note {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.9;
+    font-style: italic;
+  }
+
+  .architect-details { display: flex; flex-direction: column; gap: 3rem; }
+
+  .detail-group-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 0.5px solid var(--beige);
+  }
+
+  .detail-persons { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .detail-person { display: flex; align-items: baseline; gap: 1.5rem; }
+
+  .detail-person-role {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--text-light);
+    min-width: 140px;
+    flex-shrink: 0;
+  }
+
+  .detail-person-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--text-dark);
+  }
+
+  /* GALLERY */
+  .gallery-section { background: var(--beige-light); padding: 5rem 0; }
+
+  .gallery-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4px;
+    margin-top: 2rem;
+    height: 480px;
+  }
+
+  .gallery-slot {
+    overflow: hidden;
+    background: var(--beige);
+  }
+
+  .gallery-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .gallery-slot img:hover { transform: scale(1.03); }
+
+  .gallery-slot.tall { grid-row: span 1; }
+
+  .gallery-caption {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-top: 1rem;
+    text-align: right;
+  }
+
+  /* GENERAL */
+  .general-section { background: var(--cream); }
+
+  .general-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+
+  .info-group { margin-bottom: 2rem; }
+
+  .info-group h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--brown);
+    margin-bottom: 1rem;
+  }
+
+  .info-rows { display: flex; flex-direction: column; gap: 0.7rem; }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.5px solid var(--beige);
+    padding-bottom: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  .info-row .lbl { color: var(--text-light); }
+  .info-row .val { color: var(--text-dark); font-weight: 400; }
+
+  /* FOOTER */
+  footer {
+    background: var(--brown);
+    color: var(--beige-light);
+    padding: 4rem 3rem;
+    text-align: center;
+  }
+
+  footer .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+
+  footer p { font-size: 0.85rem; color: var(--beige-dark); margin-top: 0.3rem; }
+
+  footer .footer-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--beige-dark);
+    margin: 1.5rem auto;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-image { min-height: 70vw; }
+    .hero-content { padding: 3rem 2rem; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .architect-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .general-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .gallery-grid { grid-template-columns: 1fr; height: auto; }
+    .gallery-slot { min-height: 260px; }
+    section { padding: 4rem 1.5rem; }
+    .facts-grid { grid-template-columns: repeat(2, 1fr); }
+    .fact-cell { border-right: none; border-bottom: 1px solid var(--beige); }
+  }
+</style>
 </head>
 <body>
-    <div class="content">
-        <h1>Asunto Oy Vuorilinna</h1>
-        <p><strong>Kiinteistön nimi:</strong> Asunto Oy Vuorilinna, Helsingissä</p>
-        <p><strong>Arkkitehti:</strong> Selim A. Lindqvist, Työ 158</p>
-        <p><strong>Yhtiön perustajat ja rakentajat:</strong></p>
-        <p>Rakennusmestarit Felix Israel Olamo, Kalle Hugo Taitonen</p>
-        <p><strong>Valmistumisvuosi:</strong> 1927</p>
+
+<nav>
+  <a class="nav-logo" href="#">As Oy Vuorilinna Helsingissä</a>
+  <ul class="nav-links">
+    <li><a href="#tiedot">Tiedot</a></li>
+    <li><a href="#arkkitehti">Arkkitehti</a></li>
+    <li><a href="#kuvat">Kuvat</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding: 0;">
+  <div class="hero-image">
+    <img src="julkisivu.jpg" alt="Asunto Oy Vuorilinna Helsingissä julkisivu">
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Kruununhaka · Helsinki</p>
+    <h1 class="hero-title">Asunto Oy<br>Vuorilinna<br>Helsingissä</h1>
+    <p class="hero-subtitle">Helsingin sydämessä vuodesta 1927</p>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">Vuorilinna on arvokas kerrostaloyhtiö Kruununhaassa. Kaksi rakennusta, 79 huoneistoa ja lähes sata vuotta historiaa Eläintarhanlahden rannalla.</p>
+  </div>
+</section>
+
+<!-- FACTS -->
+<section class="facts-section" id="tiedot">
+  <div class="section-inner">
+    <p class="section-label">Perustiedot</p>
+    <h2 class="section-title">Taloyhtiö lyhyesti</h2>
+    <div class="facts-grid">
+      <div class="fact-cell">
+        <div class="fact-label">Rakennettu</div>
+        <div class="fact-value">1927</div>
+        <div class="fact-unit">Vuosi</div>
+      </div>
+      <div class="fact-cell">
+        <div class="fact-label">Huoneistot</div>
+        <div class="fact-value">79</div>
+        <div class="fact-unit">kpl yhteensä</div>
+      </div>
+      <div class="fact-cell">
+        <div class="fact-label">Kerrokset</div>
+        <div class="fact-value">7</div>
+        <div class="fact-unit">Per rakennus</div>
+      </div>
+      <div class="fact-cell">
+        <div class="fact-label">Rakennukset</div>
+        <div class="fact-value">2</div>
+        <div class="fact-unit">Kerrostaloa</div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- ARCHITECT -->
+<section class="architect-section" id="arkkitehti">
+  <div class="section-inner">
+    <p class="section-label">Suunnittelu ja rakentaminen</p>
+    <h2 class="section-title">Tekijät</h2>
+    <div class="architect-layout">
+      <div>
+        <h3 class="architect-name">Selim A.<br>Lindqvist</h3>
+        <p class="architect-work">Työ nro 158</p>
+        <div class="architect-ornament"></div>
+        <p class="architect-note">Selim A. Lindqvist (1867–1939) oli yksi aikakautensa merkittävimmistä suomalaisista arkkitehdeistä, jonka tuotanto kattoi jugend-, kansallisromantiikka- ja klassismin aikakauden.</p>
+      </div>
+      <div class="architect-details">
+        <div>
+          <p class="detail-group-label">Arkkitehti</p>
+          <div class="detail-persons">
+            <div class="detail-person">
+              <span class="detail-person-role">Suunnittelija</span>
+              <span class="detail-person-name">Selim A. Lindqvist</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="detail-group-label">Yhtiön perustajat ja rakentajat</p>
+          <div class="detail-persons">
+            <div class="detail-person">
+              <span class="detail-person-role">Rakennusmestari</span>
+              <span class="detail-person-name">Felix Israel Olamo</span>
+            </div>
+            <div class="detail-person">
+              <span class="detail-person-role">Rakennusmestari</span>
+              <span class="detail-person-name">Kalle Hugo Taitonen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="kuvat">
+  <div class="gallery-inner">
+    <p class="section-label">Kuvat</p>
+    <h2 class="section-title">Taloyhtiö kuvina</h2>
+    <div class="gallery-grid">
+      <div class="gallery-slot">
+        <img src="kuva_talvi.jpg" alt="Vuorilinna talviyössä">
+      </div>
+      <div class="gallery-slot">
+        <img src="kuva_historia.jpg" alt="Vuorilinna historiallinen kuva">
+      </div>
+      <div class="gallery-slot">
+        <img src="kuva_hissi.png" alt="Vuorilinna historiallinen hissi">
+      </div>
+    </div>
+    <p class="gallery-caption">Vasemmalta: talviyö 1970-luku · historiallinen julkisivu · alkuperäinen puuhissi</p>
+  </div>
+</section>
+
+<!-- GENERAL INFO -->
+<section class="general-section">
+  <div class="section-inner">
+    <p class="section-label">Lisätiedot</p>
+    <h2 class="section-title">Yleistietoja</h2>
+    <div class="general-grid">
+      <div>
+        <div class="info-group">
+          <h3>Tontti ja energia</h3>
+          <div class="info-rows">
+            <div class="info-row">
+              <span class="lbl">Tontin omistus</span>
+              <span class="val">Oma</span>
+            </div>
+            <div class="info-row">
+              <span class="lbl">Lämmönlähde</span>
+              <span class="val">Kauko- tai aluelämpö</span>
+            </div>
+            <div class="info-row">
+              <span class="lbl">Energialuokka</span>
+              <span class="val">F (2018)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="info-group">
+          <h3>Sijainti</h3>
+          <div class="info-rows">
+            <div class="info-row">
+              <span class="lbl">Kaupunginosa</span>
+              <span class="val">Kruununhaka</span>
+            </div>
+            <div class="info-row">
+              <span class="lbl">Kaupunki</span>
+              <span class="val">Helsinki</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Asunto Oy Vuorilinna Helsingissä</div>
+  <p>Kruununhaka, Helsinki</p>
+  <div class="footer-divider"></div>
+  <p>© 2025 Asunto Oy Vuorilinna Helsingissä</p>
+</footer>
+
 </body>
 </html>
