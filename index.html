@@ -202,8 +202,56 @@
     margin-top: 0.25rem;
   }
 
+  /* DESCRIPTION */
+  .desc-section { background: var(--white); }
+
+  .desc-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .desc-p {
+    font-size: 1rem;
+    color: var(--text-mid);
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+  }
+
+  .highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--beige-light);
+    padding-top: 2.5rem;
+  }
+
+  .hl-cell {
+    text-align: center;
+    padding: 1rem 2rem;
+    border-right: 1px solid var(--beige-light);
+  }
+
+  .hl-cell:last-child { border-right: none; }
+
+  .hl-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--brown);
+    line-height: 1;
+  }
+
+  .hl-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-top: 0.4rem;
+  }
+
   /* ARCHITECT */
-  .architect-section { background: var(--white); }
+  .architect-section { background: var(--cream); }
 
   .architect-layout {
     display: grid;
@@ -290,10 +338,7 @@
     height: 480px;
   }
 
-  .gallery-slot {
-    overflow: hidden;
-    background: var(--beige);
-  }
+  .gallery-slot { overflow: hidden; background: var(--beige); }
 
   .gallery-slot img {
     width: 100%;
@@ -306,8 +351,6 @@
 
   .gallery-slot img:hover { transform: scale(1.03); }
 
-  .gallery-slot.tall { grid-row: span 1; }
-
   .gallery-caption {
     font-size: 0.72rem;
     letter-spacing: 0.12em;
@@ -318,7 +361,7 @@
   }
 
   /* GENERAL */
-  .general-section { background: var(--cream); }
+  .general-section { background: var(--white); }
 
   .general-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
 
@@ -344,6 +387,23 @@
 
   .info-row .lbl { color: var(--text-light); }
   .info-row .val { color: var(--text-dark); font-weight: 400; }
+
+  /* MAP */
+  .map-section { background: var(--cream); padding: 0; }
+
+  .map-header {
+    padding: 5rem 3rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .map-embed {
+    width: 100%;
+    height: 480px;
+    border: none;
+    display: block;
+    filter: sepia(15%) saturate(85%);
+  }
 
   /* FOOTER */
   footer {
@@ -377,6 +437,9 @@
     .hero-content { padding: 3rem 2rem; }
     nav { padding: 1rem 1.5rem; }
     .nav-links { gap: 1.5rem; }
+    .desc-cols { grid-template-columns: 1fr; gap: 0; }
+    .highlights { grid-template-columns: 1fr; }
+    .hl-cell { border-right: none; border-bottom: 1px solid var(--beige-light); padding: 1.2rem; }
     .architect-layout { grid-template-columns: 1fr; gap: 2.5rem; }
     .general-grid { grid-template-columns: 1fr; gap: 2rem; }
     .gallery-grid { grid-template-columns: 1fr; height: auto; }
@@ -384,6 +447,8 @@
     section { padding: 4rem 1.5rem; }
     .facts-grid { grid-template-columns: repeat(2, 1fr); }
     .fact-cell { border-right: none; border-bottom: 1px solid var(--beige); }
+    .map-header { padding: 3rem 1.5rem 2rem; }
+    .map-embed { height: 320px; }
   }
 </style>
 </head>
@@ -395,6 +460,7 @@
     <li><a href="#tiedot">Tiedot</a></li>
     <li><a href="#arkkitehti">Arkkitehti</a></li>
     <li><a href="#kuvat">Kuvat</a></li>
+    <li><a href="#sijainti">Sijainti</a></li>
   </ul>
 </nav>
 
@@ -408,7 +474,7 @@
     <h1 class="hero-title">Asunto Oy<br>Vuorilinna<br>Helsingissä</h1>
     <p class="hero-subtitle">Helsingin sydämessä vuodesta 1927</p>
     <div class="hero-divider"></div>
-    <p class="hero-desc">Vuorilinna on arvokas kerrostaloyhtiö Kruununhaassa. Kaksi rakennusta, 79 huoneistoa ja lähes sata vuotta historiaa Eläintarhanlahden rannalla.</p>
+    <p class="hero-desc">Vuorilinna on arvokas kerrostaloyhtiö Kruununhaassa. Kaksi rakennusta, 79 huoneistoa ja lähes sata vuotta historiaa Siltavuorensalmen rannalla.</p>
   </div>
 </section>
 
@@ -437,6 +503,38 @@
         <div class="fact-label">Rakennukset</div>
         <div class="fact-value">2</div>
         <div class="fact-unit">Kerrostaloa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESCRIPTION -->
+<section class="desc-section">
+  <div class="section-inner">
+    <p class="section-label">Taloyhtiö</p>
+    <h2 class="section-title">Vakavarainen yhtiö arvokkaalla sijainnilla</h2>
+    <div class="desc-cols">
+      <div>
+        <p class="desc-p">Asunto Oy Vuorilinna on arvostettu ja vakavarainen taloyhtiö Helsingin Kruununhaassa, osoitteissa Kirjatyöntekijänkatu 4 ja Kristianinkatu 9. Sijainti Siltavuorensalmen rannalla yhdistää kantakaupungin palvelut, merellisen ympäristön ja poikkeuksellisen rauhallisen asuinmiljöön.</p>
+        <p class="desc-p">Vuonna 1927 valmistunut yhtiö edustaa laadukasta tiilirakentamista ja ajattoman arkkitehtuurin perinnettä. Vuorilinna on säilyttänyt historiallisen ilmeensä, ja kiinteistöä on hoidettu sekä kehitetty suunnitelmallisesti vastaamaan nykypäivän asumisen vaatimuksia.</p>
+      </div>
+      <div>
+        <p class="desc-p">Yhtiössä on 74 asuinhuoneistoa. Taloyhtiö omistaa kaikki liiketilat, 14 autohallipaikkaa sekä koko tontin, mikä tuo vakautta ja turvaa pitkällä aikavälillä.</p>
+        <p class="desc-p">Taloudellisesti Vuorilinna on vahvassa asemassa. Yhtiöllä on vuokratuloja noin 120 000 euroa vuodessa, mikä mahdollistaa ennakoivan kunnossapidon ja pitkäjänteisen kehittämisen.</p>
+      </div>
+    </div>
+    <div class="highlights">
+      <div class="hl-cell">
+        <div class="hl-num">74</div>
+        <div class="hl-label">Asuinhuoneistoa</div>
+      </div>
+      <div class="hl-cell">
+        <div class="hl-num">14</div>
+        <div class="hl-label">Autohallipaikkaa</div>
+      </div>
+      <div class="hl-cell">
+        <div class="hl-num">120 000 €</div>
+        <div class="hl-label">Vuokratulot / vuosi</div>
       </div>
     </div>
   </div>
@@ -536,6 +634,10 @@
               <span class="val">Kruununhaka</span>
             </div>
             <div class="info-row">
+              <span class="lbl">Osoitteet</span>
+              <span class="val">Kirjatyöntekijänkatu 4 &amp; Kristianinkatu 9</span>
+            </div>
+            <div class="info-row">
               <span class="lbl">Kaupunki</span>
               <span class="val">Helsinki</span>
             </div>
@@ -546,9 +648,25 @@
   </div>
 </section>
 
+<!-- MAP -->
+<section class="map-section" id="sijainti" style="padding: 0;">
+  <div class="map-header">
+    <p class="section-label">Sijainti</p>
+    <h2 class="section-title" style="margin-bottom: 0;">Kruununhaka, Helsinki</h2>
+  </div>
+  <iframe
+    class="map-embed"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1000!2d24.9574747!3d60.1760596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46920bd23a82da4b%3A0xa6c3894acda41d51!2sKirjaty%C3%B6ntekij%C3%A4nkatu%204%2C%2000170%20Helsinki!5e0!3m2!1sfi!2sfi!4v1713693600000!5m2!1sfi!2sfi"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Asunto Oy Vuorilinna Helsingissä sijainti kartalla">
+  </iframe>
+</section>
+
 <footer>
   <div class="footer-logo">Asunto Oy Vuorilinna Helsingissä</div>
-  <p>Kruununhaka, Helsinki</p>
+  <p>Kirjatyöntekijänkatu 4 &amp; Kristianinkatu 9, Helsinki</p>
   <div class="footer-divider"></div>
   <p>© 2025 Asunto Oy Vuorilinna Helsingissä</p>
 </footer>
